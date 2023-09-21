@@ -7,16 +7,11 @@
   <title>Evaluacion inicial</title>
 </head>
 <body>
-  <?php
-
-  $rd=$_GET["radio1"];
-  $Pi=PI[];
-  echo
-  "La longitud del circulo es ",$rd*($Pi*$Pi);
-echo
-"El area del círculo es",$rd*2*$Pi;
-
-
-?>
+  <h1>Prueba</h1>
+  <form action="ejercicio1.php" method="get">
+    <label for="radio">Introduce el radio del círculo:</label>
+    <input type="number" name="radio">
+    <input type="submit" value="Calcular">
+</form>
 </body>
 </html>
