@@ -15,5 +15,19 @@
 
         <button type="submit">Enviar</button>
     </form>
+    <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $_POST["nombre"];
+    $color = $_POST["color"];
+
+    // Guardar datos en cookies
+    setcookie("nombre", $nombre, time() + 3600, "/");
+    setcookie("color", $color, time() + 3600, "/");
+
+    // Redireccionar a la página resultante
+    header("Location: result.php");
+}
+?>
+
 </body>
 </html>
