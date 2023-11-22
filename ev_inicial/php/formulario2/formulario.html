@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+    <title>Formulario de contacto</title>
+</head>
+<body>
+    <h2>Formulario de contacto</h2>
+    <form action="procesar.php" method="GET">
+        <label for="cantidad">Cantidad de euros:</label>
+        <input type="text" name="cantidad" id="cantidad" required>
+        <br>
+        <label for="divisa">Moneda de destino:</label>
+        <select name="divisa">
+            <option value="dolaresUSA">dolares USA</option>
+            <option value="librasesterlinas">libras esterlinas</option>
+        </select>
+        <input type="submit" value="Convertir">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+    <title>Formulario de contacto</title>
+</head>
+<body>
+    <h2>Formulario de contacto</h2>
+    <form action="procesar.php" method="get">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" required><br><br>
+        <h3>Pregunta 1:</h3>
+        <p>¿Cuál de las siguientes respuestas es la correcta?</p>
+        <input type="radio" name="pregunta1" value="respuesta1"> Respuesta 1<br>
+        <input type="radio" name="pregunta1" value="respuesta2"> Respuesta 2<br>
+        <input type="radio" name="pregunta1" value="respuesta3"> Respuesta 3<br>
+        <input type="radio" name="pregunta1" value="respuesta4"> Respuesta 4<br><br>
+
+        <h3>Pregunta 2:</h3>
+        <p>¿Cuáles de las siguientes respuestas son correctas? (Puedes marcar una o varias)</p>
+        <input type="checkbox" name="pregunta2A" value="respuesta1"> Respuesta 1<br>
+        <input type="checkbox" name="pregunta2B" value="respuesta2"> Respuesta 2<br>
+        <input type="checkbox" name="pregunta2C" value="respuesta3"> Respuesta 3<br>
+        <input type="checkbox" name="pregunta2D" value="respuesta4"> Respuesta 4<br><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+</body>
+</html>
