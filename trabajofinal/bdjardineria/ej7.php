@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,20 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
+	echo "<h1>Conexión correcta...</h1><br>";
+
+	 echo '<div style="text-align: right; padding: 10px;">
+            <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+            <form method="post" action="#">
+                <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+            </form>
+          </div>';
+		  if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+			session_unset();
+			session_destroy();
+			header("Location: ej7.php");
+			exit();
+		}
 if (isset($_REQUEST['respuesta']))
 { /*3ª parte:  se procede a borrar el registro del cliente y, previamente, todos lo registros relacionados en tablas subordinadas*/
   borrarCliente($_REQUEST['codigo'],$_REQUEST['respuesta']);
@@ -44,7 +59,7 @@ else{	/*2ª Parte: se muestran los datos del cliente y se pide confirmación de 
 <?php
 //Funciones auxiliares
 function mostrarClienteyPreguntarBorrar($tel) {
-    $conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
+	include "conectabd.php";
 	if(!empty($tel)){
 		$consulta = mysqli_query($conexion,"SELECT * FROM clientes WHERE telefono='$tel';")
 			or die ("Error al seleccionar cliente");
@@ -58,18 +73,18 @@ function mostrarClienteyPreguntarBorrar($tel) {
 			echo "</ul><br>";
 			echo "<p>¿Quieres eliminar este cliente?</p>";
 			?>
-			<form action='ejer7.php' method='get'>
+			<form action='ej7.php' method='get'>
 				<input type="hidden" name="codigo" value='<?php $fila['CodigoCliente']?>'/>
 				<input type="submit" name ="respuesta" value="Si"/>&nbsp;&nbsp;
 				<input type="submit" name ="respuesta" value="No"/>
 			</form>
 			<?php
 		}else{
-			echo "<p>El teléfono no pertenece a ningún cliente. <a href='ejer7.php'>VOLVER</a></p>";
+			echo "<p>El teléfono no pertenece a ningún cliente. <a href='ej7.php'>VOLVER</a></p>";
 		}
 	}else{
 		/*Si el teléfono está vacío lo volvemos a pedir*/
-		header("Location: ejer7.php"); /* Redirección del navegador */
+		header("Location: ej7.php"); /* Redirección del navegador */
 	}
 }
 
@@ -106,7 +121,7 @@ function borrarCliente($codigo,$respuesta) {
 	}else{
 		echo "No se ha borrado el cliente.";
 	}
-	echo "<p><a href='ejer7.php'>VOLVER</a></p>";
+	echo "<p><a href='ej7.php'>VOLVER</a></p>";
 }
 }
 ?>

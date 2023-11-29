@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +22,19 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
-    // Conectar con el servidor de base de datos
-    $conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
+    include "conectabd.php";
+   echo '<div style="text-align: right; padding: 10px;">
+   <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+   <form method="post" action="#">
+       <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+   </form>
+ </div>';
+      if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+   session_unset();
+   session_destroy();
+   header("Location: ej4.php");
+   exit();
+   }
 
     // Seleccionar base de datos
     mysqli_select_db ($conexion,"jardineria")
@@ -48,7 +60,7 @@ if (!isset($_SESSION['logged_in'])) {
             echo "</tr>";
         }
         echo "</table>";
-        echo "</br><a href='ejer4.php'>Realizar nueva consulta</a>";
+        echo "</br><a href='ej4.php'>Realizar nueva consulta</a>";
     }
     else
     {
@@ -57,7 +69,7 @@ if (!isset($_SESSION['logged_in'])) {
         $resconsulta = mysqli_query ($conexion,$instruccion)
             or die ("Fallo en la consulta");
 
-        print ("<form action='ejer4.php' method='GET'>");
+        print ("<form action='ej4.php' method='GET'>");
         print ("Elige País &nbsp");
         print ("<select name='Pais'>");
         $nfilas = mysqli_num_rows ($resconsulta);

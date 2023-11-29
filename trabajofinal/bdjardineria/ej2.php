@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +23,19 @@ if (!isset($_SESSION['logged_in'])) {
 </form>';
 }else{
    // Conectar con el servidor de base de datos
-   $conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
-
+   include "conectabd.php";
+   echo '<div style="text-align: right; padding: 10px;">
+   <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+   <form method="post" action="#">
+       <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+   </form>
+ </div>';
+      if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+   session_unset();
+   session_destroy();
+   header("Location: ej2.php");
+   exit();
+   }
    // Seleccionar base de datos
 
 

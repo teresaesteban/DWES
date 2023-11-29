@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,15 +22,27 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
+	echo '<div style="text-align: right; padding: 10px;">
+	<span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+	<form method="post" action="#">
+		<input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+	</form>
+  </div>';
+	   if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+	session_unset();
+	session_destroy();
+	header("Location: ej6.php");
+	exit();
+	}
 if (!$_REQUEST) {
-	echo "<form  action='ejer6.php' method='get'>";
+	echo "<form  action='ej6.php' method='get'>";
 	echo "Selecciona el telefono del cliente: &nbsp;";
 	echo"<select name='codigocliente'>";
 
-	$conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
+	include "conectabd.php";
 
 	$consulta1="SELECT codigocliente, telefono, nombrecliente FROM clientes";
-	$resulconsulta1=mysqli_query($c,$consulta1);
+	$resulconsulta1=mysqli_query($conexion,$consulta1);
 
 	while ($registro = mysqli_fetch_row($resulconsulta1)){
 		echo"<option value=$registro[0]>".$registro[1]."--".$registro[2]."</option>";
@@ -68,7 +81,7 @@ else
 		?>
 
 		<table>
-		<form  action='ejer6.php' method='GET'>
+		<form  action='ej6.php' method='GET'>
 		<tr>
 			<td>CodigoCliente:</td>
 			<td><input class='readonly' type='text' name='codigocliente' value='<?php echo "$codigocliente";?>' maxlength='50'size='50' readonly></td>
@@ -141,7 +154,7 @@ else
 		</tr>
 		<tr>
 			<td><input type="submit" value="Modificar cliente" name="modificar"></td>
-			<td><a href='ejer6.php'>Vuelve al listado de clientes</a></td>
+			<td><a href='ej6.php'>Vuelve al listado de clientes</a></td>
 		</tr>
 
 		</form>
@@ -174,7 +187,7 @@ else
 			echo "<br><b>Inserción completada correctamente.</b><br><br>";
 		else
 			echo "<br><b>Ha ocurrido error al ejecutar sentencia SQL INSERT.</b><br/>";
-		echo "<a href = 'ejer6.php'>Vuelta al formulario de inserción</a><br/>";
+		echo "<a href = 'ej6.php'>Vuelta al formulario de inserción</a><br/>";
 	}
 }}?>
 </main>

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,19 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
-	$conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
+	include "conectabd.php";
+   echo '<div style="text-align: right; padding: 10px;">
+   <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+   <form method="post" action="#">
+       <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+   </form>
+ </div>';
+      if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+   session_unset();
+   session_destroy();
+   header("Location: ej5.php");
+   exit();
+   }
 if (isset($_REQUEST['enviar'])){
 //Coger valores del formulario, pero es más rápido con extract
 	/*
@@ -54,7 +67,7 @@ extract($_REQUEST);
 			echo "<br><b>Inserción completada correctamente.</b><br><br>";
 		else
 			echo "<br><b>Ha ocurrido error al ejecutar sentencia SQL INSERT.</b><br/>";
-	echo "<a href = 'ejer5.php'>Vuelta al formulario de inserción</a><br/>";
+	echo "<a href = 'ej5.php'>Vuelta al formulario de inserción</a><br/>";
 }
 else{?>
 <form action='#' method='get'>
@@ -115,8 +128,8 @@ else{?>
 	<input type="submit" name="enviar" value="Insertar nuevo cliente">
 </form>
 <?php
-}
-}?>
+
+}}?>
 </main>
     <?php include "../includes/aside2.php"; ?>
 </div>

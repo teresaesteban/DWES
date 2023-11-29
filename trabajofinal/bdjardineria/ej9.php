@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,10 +22,24 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
+	echo "<h1>Conexión correcta...</h1><br>";
+
+	 echo '<div style="text-align: right; padding: 10px;">
+            <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+            <form method="post" action="#">
+                <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+            </form>
+          </div>';
+		  if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+			session_unset();
+			session_destroy();
+			header("Location: ej9.php");
+			exit();
+		}
 //Versión con importes
 
 //Conectamos con bd jardineria
-$conexion = mysqli_connect ("localhost", "root","", "jardineria") or die ("No se puede conectar con el servidor.");
+include "conectabd.php";
 
 if (isset($_REQUEST['enviar']))  //Se ha recibido código y nombre del cliente y se procede a obtener y mostrar información de sus pedidos
 {
@@ -100,7 +115,7 @@ if (isset($_REQUEST['enviar']))  //Se ha recibido código y nombre del cliente y
 $consulta = mysqli_query ($conexion,"select CodigoCliente,NombreCliente from clientes") or die ("Fallo en la consulta");
 $nfilas = mysqli_num_rows ($consulta);
 echo "<h1>Selecciona cliente a consultar</h1><br>";
-echo "<form  action='ejer9.php' method='get'>";
+echo "<form  action='ej9.php' method='get'>";
 echo "<select name='menu'>";
 	for($f=1;$f<=$nfilas;$f++){
 		$fila = mysqli_fetch_row ($consulta);

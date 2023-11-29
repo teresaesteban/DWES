@@ -75,5 +75,5 @@ margin-right: 20%;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     grid-template-rows:auto;
-    height: 600px;
+    height: auto;
   }

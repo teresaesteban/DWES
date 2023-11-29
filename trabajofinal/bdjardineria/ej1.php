@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +17,6 @@
 <?php
 
 
-session_start();
-
 // Verificar si el usuario no está logeado
 if (!isset($_SESSION['logged_in'])) {
     // Si no está logeado, redirigir a la página de inicio de sesión
@@ -26,8 +25,21 @@ if (!isset($_SESSION['logged_in'])) {
     <input type="submit" value="Iniciar sesion">
 </form>';
 }else{
-		$conexion = mysqli_connect ("localhost", "root", "","jardineria") or die ("No se puede conectar con el servidor");
+	include "conectabd.php";
 	echo "<h1>Conexión correcta...</h1><br>";
+
+	 echo '<div style="text-align: right; padding: 10px;">
+            <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+            <form method="post" action="#">
+                <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+            </form>
+          </div>';
+		  if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
+			session_unset();
+			session_destroy();
+			header("Location: ej1.php");
+			exit();
+		}
 
 	$sql="SELECT CodigoCliente, NombreCliente, NombreContacto from clientes";
 	$resulconsulta=mysqli_query($conexion,$sql) or die ("Error al hacer la consulta");
