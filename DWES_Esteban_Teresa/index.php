@@ -9,8 +9,8 @@
 <div class="caja">
 <?php include "includes/nav.php"; ?>
 <main>
-puro texto bb
-
+<h1>PORTADA O INDEXS:</h1>
+<h2>¡Aquí se muestra el texto importante!</h2>
 </main>
 <?php include "includes/aside.php"; ?>
 </div>
