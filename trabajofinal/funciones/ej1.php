@@ -9,7 +9,7 @@
 <?php include "../includes/menu2.php"; ?>
 
 
-<div class="caja">
+<div class="caja2">
     <?php include "../includes/nav_funciones.php"; ?>
     <main>
     <h1 style="text-align: center;">TABLAS HTML</h1>

@@ -10,31 +10,24 @@
 <?php include "../includes/menu2.php"; ?>
 
 
-<div class="caja">
+<div class="caja2">
     <?php include "../includes/nav_bbdd.php"; ?>
-    <main>
-     <h1 style="text-align: center;">INSERTAR CLIENTE</h1>
+	<main>
+
+	<h1>Insertar Cliente</h1>
 <?php
 if (!isset($_SESSION['logged_in'])) {
     // Si no está logeado, redirigir a la página de inicio de sesión
-   echo "Para acceder a esta seccion tienes que iniciar sesion";
-    echo'<form action="login.php" method="post">
-    <input type="submit" value="Iniciar sesion">
-</form>';
+	echo "Para acceder a esta seccion tienes que <a  href='login.php'>
+    Iniciar Sesion</a> o <a  href='register.php' > Registrarse</a>";
 }else{
 	include "conectabd.php";
-   echo '<div style="text-align: right; padding: 10px;">
-   <span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
-   <form method="post" action="#">
-       <input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
-   </form>
- </div>';
-      if ($_REQUEST && isset($_POST['eliminar_sesion'])) {
-   session_unset();
-   session_destroy();
-   header("Location: ej5.php");
-   exit();
-   }
+	echo '<div style="text-align: right; padding: 10px;">
+	<span>Bienvenido/a, ' . $_SESSION['nombre'] . '</span>
+	<form method="post" action="#">
+		<input type="submit" name="eliminar_sesion" value="Cerrar Sesión">
+	</form>
+  </div>';
 if (isset($_REQUEST['enviar'])){
 //Coger valores del formulario, pero es más rápido con extract
 	/*
@@ -128,8 +121,8 @@ else{?>
 	<input type="submit" name="enviar" value="Insertar nuevo cliente">
 </form>
 <?php
-
-}}?>
+}
+}?>
 </main>
     <?php include "../includes/aside2.php"; ?>
 </div>
