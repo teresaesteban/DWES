@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo Ventana Emergente al Obtener Foco</title>
+  <script>
+    // Función que se ejecutará cuando el último campo obtenga el foco
+    function mostrarMensaje() {
+      alert('¡El último campo ha obtenido el foco!');
+    }
+  </script>
+</head>
+<body>
+
+  <h1>Campos de entrada</h1>
+
+  <!-- Primer campo de entrada -->
+  <input type="text" placeholder="Campo 1" />
+
+  <!-- Segundo campo de entrada -->
+  <input type="text" placeholder="Campo 2" />
+
+  <!-- Tercer campo de entrada con evento onfocus -->
+  <input type="text" placeholder="Campo 3" onfocus="mostrarMensaje();" />
+
+</body>
+</html>
